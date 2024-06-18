@@ -2,16 +2,15 @@ import turtle
 import random
 import time
 
-#create screen
+# Create screen
 screen = turtle.Screen()
 screen.bgcolor("light blue")
 
-#Create Timer
-
+# Create Timer
 timer = turtle.Turtle()
 timer.hideturtle()
 timer.penup()
-timer.goto(0, 260)  #Position the timer
+timer.goto(0, 260)  # Position the timer
 timer.color("black")
 timer.write("Time remain for Shredder", align="center", font=("Arial", 16, "normal"))
 
@@ -19,7 +18,7 @@ timer.write("Time remain for Shredder", align="center", font=("Arial", 16, "norm
 score_board = turtle.Turtle()
 score_board.hideturtle()
 score_board.penup()
-score_board.goto(0, 220) #position score_table
+score_board.goto(0, 220) # Position score_board
 score_board.color("black")
 score_board.write("Score: 0", align="center", font=("Arial", 16, "normal"))
 
@@ -29,19 +28,20 @@ leonardo.shape("turtle")
 leonardo.penup()
 leonardo.speed("fastest")
 
-#setting our variables
+# Set variables
 score = 0
 duration = 20
 start_time = time.time()
+game_over = False  # Flag to track game over state
 
 def leonardo_position():
-    """put leonardo on a random area that include with (x:-200,200 and y:-200,180"""
-    leonardo.goto(random.randint(-200, 200), random.randint(-200, 180)) #because of score board its a bit lower y+=180
+    """Place Leonardo on a random area that includes (x: -200 to 200, y: -200 to 180)"""
+    leonardo.goto(random.randint(-200, 200), random.randint(-200, 180))
 
 def leonardo_find(x, y):
-    """relocate leonardo position, increase score and we will use it with onclick function"""
+    """Relocate Leonardo's position and increase score when clicked"""
     global score
-    if leonardo.distance(x, y) < 10:
+    if not game_over and leonardo.distance(x, y) < 10:
         score += 1
         score_board.clear()
         score_board.write(f"Score: {score}", align="center", font=("Arial", 16, "normal"))
@@ -59,12 +59,15 @@ while (time.time() - start_time) < duration:
     timer.clear()
     timer.write(f"Time remain for Shredder: {time_remain}", align="center", font=("Arial", 16, "normal"))
 
-leonardo_position()
+# After the game ends
+game_over = True
 
+# Clear timer and display final score
 timer.clear()
 timer.goto(0, 0)
 timer.write(f"Game Over\nFinal Score: {score}", align="center", font=("Arial", 24, "normal"))
 
+# Clear score display
 score_board.clear()
 
 turtle.mainloop()
