@@ -8,5 +8,5 @@ The game is about to catching turtle in a period of time have fun
 
 you can give some advice if you want
 
-Thanks :d
+Thanks to @atilsamancioglu
 
